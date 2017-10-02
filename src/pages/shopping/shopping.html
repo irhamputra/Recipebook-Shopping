@@ -17,7 +17,7 @@
           type="text"
           name="ingredientName"
           placeholder="Add ingredient name"
-          ngModel></ion-input>
+          ngModel required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label fixed>Amout</ion-label>
@@ -25,12 +25,12 @@
           type="number"
           name="amount"
           placeholder="Add the number"
-          ngModel></ion-input>
+          ngModel required></ion-input>
       </ion-item>
     </ion-list>
 
     <div padding>
-      <button ion-button block type="submit">Add Item</button>
+      <button ion-button block type="submit" [disabled]="!f.valid">Add Item</button>
     </div>
   </form>
 
