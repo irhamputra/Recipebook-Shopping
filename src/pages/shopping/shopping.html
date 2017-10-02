@@ -7,6 +7,31 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <form #f="ngForm" (ngSubmit)="onAddItem(f)">
+    <ion-list inset>
+      <ion-item>
+        <ion-label fixed>Name</ion-label>
+        <ion-input
+          type="text"
+          name="ingredientName"
+          placeholder="Add ingredient name"
+          ngModel></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Amout</ion-label>
+        <ion-input
+          type="number"
+          name="amount"
+          placeholder="Add the number"
+          ngModel></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div padding>
+      <button ion-button block type="submit">Add Item</button>
+    </div>
+  </form>
 
 </ion-content>
