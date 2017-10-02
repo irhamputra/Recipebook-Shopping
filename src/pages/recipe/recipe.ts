@@ -13,5 +13,8 @@ export class RecipePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecipePage');
   }
+  ionViewWillEnter(){
+    console.log('ionViewWillEnter RecipePage')
+  }
 
 }

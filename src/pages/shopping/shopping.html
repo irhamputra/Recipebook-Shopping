@@ -2,6 +2,11 @@
 
   <ion-navbar>
     <ion-title>Shopping</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="dark" (click)="onToFormPage()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -12,7 +17,7 @@
   <form #f="ngForm" (ngSubmit)="onAddItem(f)">
     <ion-list inset>
       <ion-item>
-        <ion-label fixed>Name</ion-label>
+        <ion-label stacked>Name</ion-label>
         <ion-input
           type="text"
           name="ingredientName"
@@ -20,7 +25,7 @@
           ngModel required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label fixed>Amout</ion-label>
+        <ion-label stacked>Amout</ion-label>
         <ion-input
           type="number"
           name="amount"
@@ -36,9 +41,17 @@
 
   <div padding>
     <ion-list>
-      <ion-item *ngFor="let item of listIngredient">
-        <h3>{{ item.name }} ({{ item.amount }})</h3>
-      </ion-item>
+      <ion-item-sliding *ngFor="let item of listIngredient; let i = index">
+        <ion-item>
+          <h2>{{ item.name }} ({{ item.amount }})</h2>
+        </ion-item>
+        <ion-item-options>
+          <button ion-button color="danger" (click)="onRemoveItem(i)">
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-list>
   </div>
 
