@@ -8,24 +8,32 @@
 
 
 <ion-content>
-  <form>
-    <ion-list>
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <ion-list inset>
       <ion-item>
         <ion-label stacked>Title</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input
+          type="text"
+          formControlName="title"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>Description</ion-label>
-        <ion-textarea></ion-textarea>
+        <ion-textarea formControlName="description"></ion-textarea>
       </ion-item>
       <ion-item>
         <ion-label stacked>Difficulty</ion-label>
-        <ion-select>
+        <ion-select formControlName="difficulty">
           <ion-option *ngFor="let option of selectOptions"
           [value]="option"> {{ option }}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
-    <button ion-button block color="dark"> {{ mode }} Recipe</button>
+    <button type="button" ion-button clear block (click)="addManageRecipe()">Manage Ingredient</button>
+    <ion-list>
+      <ion-item *ngFor="let item of list"></ion-item>
+      <ion-label>Ingredient</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-list>
+    <button type="submit" ion-button block color="dark"> {{ mode }} Recipe</button>
   </form>
 </ion-content>
