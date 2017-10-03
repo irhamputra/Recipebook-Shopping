@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {NavController, NavParams, ActionSheetController, AlertController} from "ionic-angular";
+import {NavParams, ActionSheetController, AlertController} from "ionic-angular";
 import {FormGroup, FormControl, Validators, FormArray} from "@angular/forms";
 
 @Component({
@@ -13,8 +13,7 @@ export class EditRecipesPage implements OnInit {
   selectOptions = ["Easy", "Medium", "Hard"];
   recipeForm: FormGroup;
 
-  constructor(private navCtrl: NavController,
-              private navParams: NavParams,
+  constructor(private navParams: NavParams,
               private actionSheetCtrl: ActionSheetController,
               private alertCtrl: AlertController) {
   }
@@ -36,7 +35,14 @@ export class EditRecipesPage implements OnInit {
           text: 'Remove all',
           role: 'destructive',
           handler: () => {
-
+            // Removing All Data
+            const fArray: FormArray = <FormArray>this.recipeForm.get('ingredients');
+            const leng = fArray.length;
+            if ( leng > 0 ){
+              for (let i = leng -1; i >= 0; i--){
+                fArray.removeAt(i)
+              }
+            }
           }
         },
         {
