@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {NavParams, ActionSheetController, AlertController} from "ionic-angular";
+import {NavParams, ActionSheetController, AlertController, ToastController} from "ionic-angular";
 import {FormGroup, FormControl, Validators, FormArray} from "@angular/forms";
 
 @Component({
@@ -15,7 +15,8 @@ export class EditRecipesPage implements OnInit {
 
   constructor(private navParams: NavParams,
               private actionSheetCtrl: ActionSheetController,
-              private alertCtrl: AlertController) {
+              private alertCtrl: AlertController,
+              private toastCtrl: ToastController) {
   }
 
   onSubmit() {
@@ -28,6 +29,7 @@ export class EditRecipesPage implements OnInit {
       buttons: [{
         text: 'Add Ingredients',
         handler: () => {
+          // Calling alert controller
           this.createIngredientAlert().present()
         }
       },
@@ -42,6 +44,12 @@ export class EditRecipesPage implements OnInit {
               for (let i = leng -1; i >= 0; i--){
                 fArray.removeAt(i)
               }
+              const toast = this.toastCtrl.create({
+                message: 'All ingredients were deleted',
+                duration: 1590,
+                position: 'top'
+              });
+              toast.present();
             }
           }
         },
@@ -64,10 +72,22 @@ export class EditRecipesPage implements OnInit {
           text: 'Add',
           handler: data => {
             if (data.name.trim() == '' || data.name == null){
+              const toast = this.toastCtrl.create({
+                message: 'Please enter the ingredient',
+                duration: 1590,
+                position: 'top'
+              });
+              toast.present();
               return;
             }
-            // TODO: Error message
-            (<FormArray>this.recipeForm.get('ingredients')).push(new FormControl(data.name, Validators.required))
+            // TODO: Toast message if success
+            (<FormArray>this.recipeForm.get('ingredients')).push(new FormControl(data.name, Validators.required));
+            const toast = this.toastCtrl.create({
+              message: 'You have added the ingredient',
+              duration: 1590,
+              position: 'top'
+            });
+            toast.present();
           }
         },
         {
