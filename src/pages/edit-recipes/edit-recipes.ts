@@ -40,7 +40,12 @@ export class EditRecipesPage implements OnInit {
         return { name: name, amount: 1 }
       })
     }
-    this.recipeService.addRecipe(value.title, value.description, value.difficulty, ingredients);
+    // Update Recipe
+    if (this.mode == 'Edit'){
+      this.recipeService.updateRecipe(this.index, value.title, value.description, value.difficulty, ingredients)
+    } else {
+      this.recipeService.addRecipe(value.title, value.description, value.difficulty, ingredients);
+    }
     this.recipeForm.reset();
     this.navCtrl.popToRoot();
   }
@@ -139,6 +144,9 @@ export class EditRecipesPage implements OnInit {
       title = this.recipe.title;
       description = this.recipe.description;
       difficulty = this.recipe.difficulty;
+      for (let ingredient of this.recipe.ingredients){
+        ingredients.push(new FormControl(ingredient.name, Validators.required))
+      }
     }
 
     this.recipeForm = new FormGroup({
