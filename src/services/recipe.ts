@@ -9,7 +9,8 @@ export class RecipeServices {
             difficulty: string,
             ingredients: Ingredient[])
   {
-    this.recipe.push(new Recipe(title, description, difficulty, ingredients))
+    this.recipe.push(new Recipe(title, description, difficulty, ingredients));
+    console.log(this.recipe)
   }
 
   removeRecipe(index: number){
