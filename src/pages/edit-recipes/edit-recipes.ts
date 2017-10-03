@@ -1,6 +1,13 @@
-import {Component, OnInit} from "@angular/core";
-import {NavParams, ActionSheetController, AlertController, ToastController, NavController} from "ionic-angular";
-import {FormGroup, FormControl, Validators, FormArray} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
+import {
+  NavParams,
+  ActionSheetController,
+  AlertController,
+  ToastController, NavController
+} from "ionic-angular";
+
+import { Recipe } from "../../models/recipe";
 import {RecipeServices} from "../../services/recipe";
 
 @Component({
@@ -13,6 +20,8 @@ export class EditRecipesPage implements OnInit {
   mode = "New";
   selectOptions = ["Easy", "Medium", "Hard"];
   recipeForm: FormGroup;
+  recipe: Recipe;
+  index: number;
 
   constructor(private navParams: NavParams,
               private actionSheetCtrl: ActionSheetController,
@@ -112,15 +121,31 @@ export class EditRecipesPage implements OnInit {
 
   ngOnInit() {
     this.mode = this.navParams.get('mode');
+    if ( this.mode == 'Edit'){
+      this.recipe = this.navParams.get('recipe');
+      this.index = this.navParams.get('index');
+    }
     this.initForm()
   }
 
   private initForm() {
+    // Default value
+    let title = null;
+    let description  = null;
+    let difficulty = 'Easy';
+    let ingredients = [];
+
+    if (this.mode == 'Edit'){
+      title = this.recipe.title;
+      description = this.recipe.description;
+      difficulty = this.recipe.difficulty;
+    }
+
     this.recipeForm = new FormGroup({
-      'title': new FormControl(null, Validators.required),
-      'description': new FormControl(null, Validators.required),
-      'difficulty': new FormControl('Easy', Validators.required),
-      'ingredients': new FormArray([])
+      'title': new FormControl(title, Validators.required),
+      'description': new FormControl(description, Validators.required),
+      'difficulty': new FormControl(difficulty, Validators.required),
+      'ingredients': new FormArray(ingredients)
     })
   }
 }

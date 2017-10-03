@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {Recipe} from "../../models/recipe";
+import {EditRecipesPage} from "../edit-recipes/edit-recipes";
 
 @Component({
   selector: 'page-recipe',
@@ -20,7 +21,7 @@ export class RecipePage implements OnInit{
   }
 
   onEditRecipe(){
-
+    this.navCtrl.push(EditRecipesPage, { 'mode': 'Edit', recipe: this.recipe, index: this.index})
   }
 
   onDeleteRecipe() {
