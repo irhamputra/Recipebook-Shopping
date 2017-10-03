@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {NavController, NavParams, ActionSheetController} from "ionic-angular";
-import {FormGroup, FormControl, Validators} from "@angular/forms";
+import {NavController, NavParams, ActionSheetController, AlertController} from "ionic-angular";
+import {FormGroup, FormControl, Validators, FormArray} from "@angular/forms";
 
 @Component({
   selector: 'page-edit-recipes',
@@ -13,9 +13,10 @@ export class EditRecipesPage implements OnInit {
   selectOptions = ["Easy", "Medium", "Hard"];
   recipeForm: FormGroup;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public actionSheetCtrl: ActionSheetController) {
+  constructor(private navCtrl: NavController,
+              private navParams: NavParams,
+              private actionSheetCtrl: ActionSheetController,
+              private alertCtrl: AlertController) {
   }
 
   onSubmit() {
@@ -24,11 +25,11 @@ export class EditRecipesPage implements OnInit {
 
   addManageRecipe() {
     const actionSheet = this.actionSheetCtrl.create({
-      title: 'Add Ingredients',
+      title: 'What you want to do?',
       buttons: [{
         text: 'Add Ingredients',
         handler: () => {
-
+          this.createIngredientAlert().present()
         }
       },
         {
@@ -37,6 +38,35 @@ export class EditRecipesPage implements OnInit {
           handler: () => {
 
           }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        }]
+    });
+    actionSheet.present();
+  }
+
+  private createIngredientAlert() {
+    return this.alertCtrl.create({
+      title: 'Add ingredient',
+      inputs: [{
+          name: 'name',
+          placeholder: 'Name'
+        }],
+      buttons: [{
+          text: 'Add',
+          handler: data => {
+            if (data.name.trim() == '' || data.name == null){
+              return;
+            }
+            // TODO: Error message
+            (<FormArray>this.recipeForm.get('ingredients')).push(new FormControl(data.name, Validators.required))
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
         }]
     })
   }
@@ -51,7 +81,7 @@ export class EditRecipesPage implements OnInit {
       'title': new FormControl(null, Validators.required),
       'description': new FormControl(null, Validators.required),
       'difficulty': new FormControl('Easy', Validators.required),
-
+      'ingredients': new FormArray([])
     })
   }
 }

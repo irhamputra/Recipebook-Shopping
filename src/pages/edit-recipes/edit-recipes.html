@@ -16,10 +16,12 @@
           type="text"
           formControlName="title"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label stacked>Description</ion-label>
         <ion-textarea formControlName="description"></ion-textarea>
       </ion-item>
+
       <ion-item>
         <ion-label stacked>Difficulty</ion-label>
         <ion-select formControlName="difficulty">
@@ -28,12 +30,17 @@
         </ion-select>
       </ion-item>
     </ion-list>
-    <button type="button" ion-button clear block (click)="addManageRecipe()">Manage Ingredient</button>
-    <ion-list>
-      <ion-item *ngFor="let item of list"></ion-item>
-      <ion-label>Ingredient</ion-label>
-      <ion-input type="text"></ion-input>
+
+    <div text-center>
+    <button type="button" ion-button outline round color="dark" block (click)="addManageRecipe()">Manage Ingredient</button>
+    </div>
+
+    <ion-list inset formArrayName="ingredients">
+      <ion-item *ngFor="let igControl of recipeForm.get('ingredients').controls; let i = index">
+        <ion-label stacked>Ingredient</ion-label>
+        <ion-input type="text" [formControlName]="i" ></ion-input>
+      </ion-item>
     </ion-list>
-    <button type="submit" ion-button block color="dark"> {{ mode }} Recipe</button>
+    <button type="submit" ion-button round block color="dark"> {{ mode }} Recipe</button>
   </form>
 </ion-content>
