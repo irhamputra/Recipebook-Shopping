@@ -32,7 +32,7 @@
     </ion-list>
 
     <div text-center>
-    <button type="button" ion-button outline round color="dark" block (click)="addManageRecipe()">Manage Ingredient</button>
+    <button type="button" ion-button clear round color="dark" block (click)="addManageRecipe()">Manage Ingredient</button>
     </div>
 
     <ion-list inset formArrayName="ingredients">
@@ -41,6 +41,6 @@
         <ion-input type="text" [formControlName]="i" ></ion-input>
       </ion-item>
     </ion-list>
-    <button type="submit" ion-button round block color="dark"> {{ mode }} Recipe</button>
+    <button [disabled]="!recipeForm.valid" type="submit" ion-button round block color="dark"> {{ mode }} Recipe</button>
   </form>
 </ion-content>
