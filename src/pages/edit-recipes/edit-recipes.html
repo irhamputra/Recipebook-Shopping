@@ -11,14 +11,14 @@
   <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
     <ion-list inset>
       <ion-item>
-        <ion-label stacked>Title</ion-label>
+        <ion-label stacked>Name</ion-label>
         <ion-input
           type="text"
           formControlName="title"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>Description</ion-label>
+        <ion-label stacked>How to cook</ion-label>
         <ion-textarea formControlName="description"></ion-textarea>
       </ion-item>
 
