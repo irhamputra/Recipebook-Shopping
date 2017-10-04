@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, ViewController} from 'ionic-angular';
 import { EditRecipesPage } from "../edit-recipes/edit-recipes";
 import {Recipe} from "../../models/recipe";
 import {RecipeServices} from "../../services/recipe";
@@ -13,11 +13,14 @@ export class RecipesPage {
   private recipes: Recipe[] = [];
 
   constructor(public navCtrl: NavController,
-              public recipeService: RecipeServices) {
+              public recipeService: RecipeServices,
+              private viewCtrl: ViewController) {
   }
 
   ionViewWillEnter(){
-    this.recipes = this.recipeService.getRecipe()
+    this.recipes = this.recipeService.getRecipe();
+    this.viewCtrl.setBackButtonText('List');
+    this.viewCtrl.showBackButton(false);
   }
 
   toAddRecipe(){

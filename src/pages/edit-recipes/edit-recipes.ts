@@ -52,7 +52,7 @@ export class EditRecipesPage implements OnInit {
 
   addManageRecipe() {
     const actionSheet = this.actionSheetCtrl.create({
-      title: 'What you want to do?',
+      title: 'Manage ingredients',
       buttons: [{
         text: 'Add Ingredients',
         handler: () => {
