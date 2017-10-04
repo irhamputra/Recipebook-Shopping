@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {AuthService} from "../../services/auth";
 import {LoadingController, AlertController} from "ionic-angular";
+import {SignupPage} from "../signup/signup";
 
 @Component({
   selector: 'page-signin',
   templateUrl: 'signin.html',
 })
 export class SigninPage {
+  singUpPage = SignupPage;
 
   constructor(private authService: AuthService,
               private loaderCtrl: LoadingController,

@@ -16,6 +16,14 @@
   <form #form="ngForm" (ngSubmit)="signUpUser(form)">
     <ion-list inset>
       <ion-item>
+        <ion-label stacked>First Name</ion-label>
+        <ion-input type="text" ngModel name="firstName" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Last Name</ion-label>
+        <ion-input type="text" ngModel name="lastName" required></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label stacked>Email</ion-label>
         <ion-input type="email" ngModel name="email" required></ion-input>
       </ion-item>

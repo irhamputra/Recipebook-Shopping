@@ -1,11 +1,6 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-buttons start>
-      <button ion-button icon-only color="dark" menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
     <ion-title>Log In</ion-title>
   </ion-navbar>
 
@@ -13,6 +8,10 @@
 
 
 <ion-content padding>
+  <div text-center class="logoContainer">
+    <h1 class="logo">Retceptify</h1>
+    <ion-note>Write it, Save it, Share it</ion-note>
+  </div>
   <form #form="ngForm" (ngSubmit)="signInUser(form)">
     <ion-list inset>
       <ion-item>
@@ -20,10 +19,15 @@
         <ion-input type="email" ngModel name="email" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked >Password</ion-label>
+        <ion-label stacked>Password</ion-label>
         <ion-input type="password" ngModel name="password" required></ion-input>
       </ion-item>
     </ion-list>
-    <button ion-button block round color="dark" [disabled]="!form.valid">Sign Up</button>
+    <button ion-button block round color="dark" [disabled]="!form.valid">Log In</button>
   </form>
+
 </ion-content>
+
+<ion-footer ion-fixed text-center>
+  <button ion-button block clear color="dark" [navPush]="singUpPage">Create new accout</button>
+</ion-footer>
