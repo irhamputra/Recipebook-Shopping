@@ -14,6 +14,8 @@ export class MyApp {
   tabsPage = TabsPage;
   signinPage = SigninPage;
   signupPage = SignupPage;
+  isAuth = false;
+
   @ViewChild('nav') navCtrl: NavController;
 
   constructor(platform: Platform,
@@ -25,6 +27,18 @@ export class MyApp {
         apiKey: "AIzaSyCyqvts3BN2bVISYJu_5y4FiLsHh86PYWc",
         authDomain: "ionic-recipebook-51ccd.firebaseapp.com",
       });
+
+      // manage user state
+      firebase.auth().onAuthStateChanged( user => {
+        if (user) {
+          this.isAuth = true;
+          this.navCtrl.setRoot(this.tabsPage)
+        } else {
+          this.isAuth = false;
+          this.navCtrl.setRoot(this.signinPage);
+        }
+      });
+
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
