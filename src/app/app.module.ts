@@ -16,8 +16,8 @@ import {RecipeServices} from "../services/recipe";
 import {SignupPage} from "../pages/signup/signup";
 import {SigninPage} from "../pages/signin/signin";
 import {AuthService} from "../services/auth";
-import {ShoppingOptionPage} from "../pages/shopping/shopping-option/shoppingOption";
 import {HttpModule} from "@angular/http";
+import {DatabaseOptionPage} from "../pages/database/database-option";
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import {HttpModule} from "@angular/http";
     ShoppingformPage,
     SignupPage,
     SigninPage,
-    ShoppingOptionPage
+    DatabaseOptionPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +48,7 @@ import {HttpModule} from "@angular/http";
     ShoppingformPage,
     SignupPage,
     SigninPage,
-    ShoppingOptionPage
+    DatabaseOptionPage
   ],
   providers: [
     StatusBar,

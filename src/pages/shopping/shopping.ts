@@ -3,7 +3,7 @@ import {NgForm} from "@angular/forms";
 import {ShoppingService} from "../../services/shopping";
 import {Ingredient} from "../../models/ingridient";
 import {AlertController, NavController, PopoverController, LoadingController} from "ionic-angular";
-import {ShoppingOptionPage} from "./shopping-option/shoppingOption";
+import {DatabaseOptionPage} from "../database/database-option";
 import {AuthService} from "../../services/auth";
 
 @Component({
@@ -18,7 +18,7 @@ export class ShoppingPage {
               public navCtrl: NavController,
               private popoverCtrl: PopoverController,
               private authService: AuthService,
-              private loaderCtrl: LoadingController) {
+              private loaderCtrl: LoadingController,) {
   }
 
   onShowOption(event: MouseEvent) {
@@ -27,7 +27,7 @@ export class ShoppingPage {
       content: 'Please wait...',
       duration: 1500
     });
-    const popover = this.popoverCtrl.create(ShoppingOptionPage);
+    const popover = this.popoverCtrl.create(DatabaseOptionPage);
     popover.present({ev: event});
     popover.onDidDismiss(
       data => {
@@ -45,19 +45,17 @@ export class ShoppingPage {
                       loader.dismiss();
                       if (list) {
                         this.listIngredient = list;
-                        console.log(list);
                       } else {
                         this.listIngredient = [];
                       }
                     },
                     error => {
                       loader.dismiss();
-                      console.log(error)
+                      this.errorHandling(error.json().error)
                     }
                   );
               });
             break;
-
           case 'store':
             loader.present();
             this.authService.getActiveUser().getIdToken()
@@ -70,7 +68,7 @@ export class ShoppingPage {
                     },
                     error => {
                       loader.dismiss();
-                      console.log(error);
+                      this.errorHandling(error.message);
                     }
                   );
               });
@@ -93,6 +91,15 @@ export class ShoppingPage {
     this.listIngredient = this.shoppingServices.getItem();
   }
 
+  private errorHandling(errorMessage: string) {
+    const alert = this.alertCtrl.create({
+      title: 'Error',
+      message: errorMessage,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
   onRemoveItem(index: number) {
     const alert = this.alertCtrl.create({
       title: 'Delete a list',
@@ -107,9 +114,6 @@ export class ShoppingPage {
         {
           text: 'no',
           role: 'cancel',
-          handler: () => {
-            console.log('Cancel delete task');
-          }
         }]
     });
 

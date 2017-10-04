@@ -25,7 +25,7 @@ import {ViewController} from "ionic-angular";
             </ion-grid>`
 })
 
-export class ShoppingOptionPage {
+export class DatabaseOptionPage {
   constructor(private viewCtrl: ViewController){};
 
   onActionEvent(action: string){
