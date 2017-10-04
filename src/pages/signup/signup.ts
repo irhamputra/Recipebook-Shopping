@@ -16,9 +16,9 @@ export class SignupPage {
   signUpUser(form: NgForm){
     // loading component
     const loading = this.loaderCtrl.create({
-      content: 'Please wait',
+      content: 'Please wait..',
       spinner: 'dots',
-      duration: 2000,
+      duration: 1500,
     });
     // form value default
     let formEmail = form.value.email;
