@@ -58,7 +58,7 @@ export class ShoppingPage {
               });
             break;
 
-          case 'save':
+          case 'store':
             loader.present();
             this.authService.getActiveUser().getIdToken()
               .then((token: string) => {
