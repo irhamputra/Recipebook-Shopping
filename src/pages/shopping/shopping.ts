@@ -2,8 +2,9 @@ import {Component} from "@angular/core";
 import {NgForm} from "@angular/forms";
 import {ShoppingService} from "../../services/shopping";
 import {Ingredient} from "../../models/ingridient";
-import {AlertController, NavController} from "ionic-angular";
-import {ShoppingformPage} from "../shoppingform/shoppingform";
+import {AlertController, NavController, PopoverOptions, PopoverController} from "ionic-angular";
+import {ShoppingOptionPage} from "./shopping-option/shoppingOption";
+import {AuthService} from "../../services/auth";
 
 @Component({
   selector: 'page-shopping',
@@ -14,11 +15,23 @@ export class ShoppingPage {
 
   constructor(private shoppingServices: ShoppingService,
               public alertCtrl: AlertController,
-              public navCtrl: NavController) {
+              public navCtrl: NavController,
+              private popoverCtrl: PopoverController,
+              private authService: AuthService) {
   }
 
-  onToFormPage(){
-    this.navCtrl.push(ShoppingformPage);
+  onShowOption(event: MouseEvent){
+    const popover = this.popoverCtrl.create(ShoppingOptionPage);
+    popover.present({ev: event});
+    popover.onDidDismiss(data => {
+      if (data.action == 'load'){
+
+      } else {
+        this.authService.getActiveUser().getToken()
+          .then()
+          .catch(error => console.log(error));
+      }
+    })
   }
 
   ionViewWillEnter() {

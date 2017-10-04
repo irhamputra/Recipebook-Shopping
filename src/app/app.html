@@ -7,18 +7,18 @@
 
   <ion-content>
     <ion-list no-lines>
-      <button 
-        ion-item 
-        icon-left 
+      <button
+        ion-item
+        icon-left
         (click)="onLoad(signinPage)"
         *ngIf="!isAuth"
       >
         <ion-icon name="log-in"></ion-icon>
         Log In
       </button>
-      <button 
-        ion-item 
-        icon-left 
+      <button
+        ion-item
+        icon-left
         (click)="onLogout()"
         *ngIf="isAuth"
       >
