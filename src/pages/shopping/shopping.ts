@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 import {NgForm} from "@angular/forms";
 import {ShoppingService} from "../../services/shopping";
 import {Ingredient} from "../../models/ingridient";
-import {AlertController, NavController, PopoverOptions, PopoverController} from "ionic-angular";
+import {AlertController, NavController, PopoverController, LoadingController} from "ionic-angular";
 import {ShoppingOptionPage} from "./shopping-option/shoppingOption";
 import {AuthService} from "../../services/auth";
 
@@ -17,21 +17,66 @@ export class ShoppingPage {
               public alertCtrl: AlertController,
               public navCtrl: NavController,
               private popoverCtrl: PopoverController,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private loaderCtrl: LoadingController) {
   }
 
-  onShowOption(event: MouseEvent){
+  onShowOption(event: MouseEvent) {
+    const loader = this.loaderCtrl.create({
+      spinner: 'dots',
+      content: 'Please wait...',
+      duration: 1500
+    });
     const popover = this.popoverCtrl.create(ShoppingOptionPage);
     popover.present({ev: event});
-    popover.onDidDismiss(data => {
-      if (data.action == 'load'){
+    popover.onDidDismiss(
+      data => {
+        if (!data) {
+          return;
+        }
+        switch (data.action) {
+          case 'load':
+            loader.present();
+            this.authService.getActiveUser().getIdToken()
+              .then((token: string) => {
+                this.shoppingServices.fetchList(token)
+                  .subscribe(
+                    (list: Ingredient[]) => {
+                      loader.dismiss();
+                      if (list) {
+                        this.listIngredient = list;
+                        console.log(list);
+                      } else {
+                        this.listIngredient = [];
+                      }
+                    },
+                    error => {
+                      loader.dismiss();
+                      console.log(error)
+                    }
+                  );
+              });
+            break;
 
-      } else {
-        this.authService.getActiveUser().getToken()
-          .then()
-          .catch(error => console.log(error));
-      }
-    })
+          case 'save':
+            loader.present();
+            this.authService.getActiveUser().getIdToken()
+              .then((token: string) => {
+                this.shoppingServices.storeList(token)
+                  .subscribe(
+                    () => {
+                      loader.dismiss();
+                      console.log('Success')
+                    },
+                    error => {
+                      loader.dismiss();
+                      console.log(error);
+                    }
+                  );
+              });
+            break;
+        }
+      })
   }
 
   ionViewWillEnter() {

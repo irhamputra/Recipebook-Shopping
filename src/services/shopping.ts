@@ -12,7 +12,6 @@ export class ShoppingService {
 
   addItem(name: string, amount: number){
     this.ingredients.push(new Ingredient(name, amount));
-    // console.log(this.ingredients);
   }
 
   addMultipleItem(items: Ingredient[]){
@@ -30,9 +29,24 @@ export class ShoppingService {
   storeList(token: string){
     const userId = this.authService.getActiveUser().uid;
     return this.http
-      .put('https://ionic-recipebook-51ccd.firebaseio.com/' + userId + '/shopping-list.json', this.ingredients)
+      .put('https://ionic-recipebook-51ccd.firebaseio.com/' + userId + '/shopping-list.json?auth=' + token, this.ingredients)
       .map((respons: Response) => {
         return respons.json();
+      });
+  }
+
+  fetchList(token: string){
+    const userId = this.authService.getActiveUser().uid;
+    return this.http.get('https://ionic-recipebook-51ccd.firebaseio.com/' + userId + '/shopping-list.json?auth=' + token, this.ingredients)
+      .map((response: Response) => {
+        return response.json();
+      })
+      .do((ingredients: Ingredient[]) => {
+        if (ingredients){
+          this.ingredients = ingredients
+        } else {
+          this.ingredients = []
+        }
       });
   }
 }
