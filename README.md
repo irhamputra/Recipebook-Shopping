@@ -4,7 +4,7 @@ Recipebook and Shopping list mobile app built with Ionic3-Angular4
 ![alt text](https://imgur.com/a/gN51V)
 
 
-#### Getting Started
+### Getting Started
 Clone or download the repo
 
 ```
