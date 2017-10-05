@@ -1,7 +1,7 @@
 # Retceptify
 Recipebook and Shopping list mobile app built with Ionic3-Angular4
 
-![alt text](https://imgur.com/a/gN51V)
+![Imgur](https://i.imgur.com/5bCFDP1.gif)
 
 
 ### Getting Started
