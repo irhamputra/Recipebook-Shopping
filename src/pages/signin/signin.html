@@ -9,7 +9,7 @@
 
 <ion-content padding>
   <div text-center class="logoContainer">
-    <h1 class="logo">Retceptify</h1>
+    <h1 class="logo">Recipy</h1>
     <ion-note>Write it, Save it, Share it</ion-note>
   </div>
   <form #form="ngForm" (ngSubmit)="signInUser(form)">
@@ -25,9 +25,10 @@
     </ion-list>
     <button ion-button block round color="dark" [disabled]="!form.valid">Log In</button>
   </form>
-
+  <div text-center>
+    <br>
+    <p>or</p>
+    <button ion-button block round outline color="danger" [navPush]="singUpPage">Create new accout</button>
+  </div>
 </ion-content>
 
-<ion-footer ion-fixed text-center>
-  <button ion-button block clear color="dark" [navPush]="singUpPage">Create new accout</button>
-</ion-footer>

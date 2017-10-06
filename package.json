@@ -1,5 +1,5 @@
 {
-    "name": "Retceptify",
+    "name": "Recipy",
     "version": "1.0.0",
     "author": "Irham",
     "homepage": "http://irhamputra.com",
@@ -43,7 +43,7 @@
         "@ionic/app-scripts": "2.1.4",
         "typescript": "2.3.4"
     },
-    "description": "An Ionic project",
+    "description": "Recipe book and shopping list mobile application",
     "cordova": {
         "plugins": {
             "cordova-plugin-device": {},

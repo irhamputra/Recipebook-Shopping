@@ -1,5 +1,5 @@
-# Retceptify
-Recipebook and Shopping list mobile app built with Ionic3-Angular4
+# Recipy
+Recipebook and Shopping list mobile app built with Ionic3-Angular4 and Firebase
 
 ![Imgur](https://i.imgur.com/5bCFDP1.gif)
 
