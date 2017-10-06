@@ -8,7 +8,7 @@ Recipebook and Shopping list mobile app built with Ionic3-Angular4 and Firebase
 Clone or download the repo
 
 ```
-$ git clone https://github.com/irhamputra/Retceptify.git
+$ git clone https://github.com/irhamputra/Recipy.git
 $ npm install
 $ ionic serve
 ```
